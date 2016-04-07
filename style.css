@@ -1,0 +1,10 @@
+		th, td {
+			padding: 10px;
+		}
+			th {
+				background-color: #4CAF50;
+				color: white;
+			}
+		#tableP{
+			width:60%;
+		}

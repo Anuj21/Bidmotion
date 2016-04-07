@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Hydrane AngularJS Frontend Dev CS</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<script src="ng-infinite-scroll.min.js"> </script>
+</head>
+
+<body>
+	<div ng-app="myApp">
+
+		 <h1  style="text-align:center">Hydrane AngularJS Frontend Dev CS</h1>
+			 <br />		
+		
+		<div ng-controller="MyController">
+		<p  style="text-align:center">
+			<button ng-init="getItems();" id="button">GO!</button>
+		
+		</p>
+		<p >
+		<table id="containerP" align="center">
+		<tr>
+		<td>
+		 Select Continent Name:
+		</td>	
+		<td>
+			<select  id="continent" ng-model="selectcontinent"  ng-options="item.continentName as item.continentName for item in items | unique:'continentName' | orderBy:'continentName'"><option value="">-- ALL --</option></select> 
+		</td>	 
+		</tr>
+		<tr>
+		<td>		
+		 Select metric:
+		</td>
+		<td>
+		<select ng-model="metric.selectedOption" id="metric" ng-options="option.id for option in metric.availableOptions track by option.id">
+		
+			</select>
+		
+		</td>	
+		</tr>
+		<tr>
+		<td>	
+		 Select chart max results:
+		</td>
+		<td>		
+		<select id="chartMax">
+		<option selected value="5">5</option>
+		<option value="10">10</option>
+		<option value="15">15</option>
+		<option value="20">20</option>
+			</select>
+		</td>
+		</tr>
+		</table>
+		</p>		
+
+		<div id="containerma" style="float:left;min-width:310 px;height: 400px; max-width:600px; margin: 0 auto"></div>
+		<div id="containermp" style="float:right;min-width:310 px;height: 400px; max-width:600px; margin: 0 auto"></div>
+	
+		<div infinite-scroll="myPagingFunction()" infinite-scroll-distance="3">
+
+		<table id="tableP" align="center" cellspacing="5" class="table table-striped table-bordered">
+		<thead>
+		<tr>
+			<td class="tdfetch" id="tdcontinent"><a href="" ng-click="fieldName='continentName';">ContinentName</a></td>
+			<td class="tdfetch" id="tdcountry"><a href="" ng-click="fieldName='countryName';">CountryName</a></td>
+			<td class="tdfetch "id="tdarea"><a href="" ng-click="fieldName='areaInSqKm';">AreaInSqKm</a></td>
+			<td class="tdfetch" id="tdpop"><a href="" ng-click="fieldName='population';">Population</a></td>
+		</tr>
+		</thead>
+
+		<tbody>
+
+			
+ 		<tr ng-repeat="item in items | orderBy:fieldName | filter: selectcontinent||undefined ">
+		<td  style="text-align:left">{{ item.continentName }}</td>
+		<td class="countryG" style="text-align:left">{{ item.countryName }}</td>
+		<td class="tdarearea totalarea" style="text-align:left">{{ item.areaInSqKm }}</td>
+		<td class="tdpopop totalpop" style="text-align:left">{{ item.population }}</td>
+ 		</tr>
+		
+		
+		<tr>
+		<td> </td>
+		<td>Total</td>
+		<td id="totala">{{ getTotal('totalarea')}}</td>
+		<td id="totalp">{{ getTotal('totalpop')}}</td>
+		</tr>
+	
+		</tbody>
+		</table>
+		
+		</div>
+		
+		</div>
+<script src="call.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
